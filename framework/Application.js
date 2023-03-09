@@ -45,6 +45,9 @@ module.exports = class Application {
 
             req.on('end', () => {
                 if(body) {
+                    // тело запроса мб не только JSON-ом, поэтому нужно добавить проверку типов
+                    // и в зависимости от типа обрабатывать по разному,
+                    // в задании думаю достаточно просто сделать обработку ошибки парсинга JSON
                     req.body = JSON.parse(body);
                 }
                 this.middlewares.forEach(middleware => middleware(req, res))
